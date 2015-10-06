@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html ng-app="simplePaginationApp">
+    <head>
+        <meta charset="UTF-8">
+        <link href="node_modules/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+        <script src="node_modules/angular/angular.js"></script>
+        <script src="node_modules/angular-bootstrap/ui-bootstrap.js"></script>
+        <script src="node_modules/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+        <script src="node_modules/moment/moment.js"></script>
+        <script src="js/controllers.js"></script>
+    </head>
+
+    <body ng-controller="paginationCtrl">
+        <div class="container-fluid">
+
+            <div class="row>">
+                <div class="col-sm-12">
+                    <h3>Simple example using UI Bootstrap Pagination directive with a RESTful paginated resource</h3>
+                </div>
+            </div>
+            <div class="row>">
+                <div class="col-sm-12">
+                    <p>Simple example using <a href="https://angular-ui.github.io/bootstrap/" target="_blank">UI Bootstrap</a> 
+                        Pagination to show pagination of data returned from a RESTful resource that
+                        returns paginated data.</p>
+                </div>
+            </div>
+            <table class="table">
+                
+                <tr ng-repeat="item in currentPageItems.data">
+                    <td>{{item.spotReceivedTimestamp.$date}}</td>
+                    <td>{{item.spotter}}</td>
+                    <td>{{item.word1}} {{item.word2}} {{item.word3}}</td>
+
+                    
+                </tr>
+                
+            </table>
+
+
+            <div class="row>">
+                <div class="col-sm-12">
+                    <pagination ng-model="currentPage" total-items="totalItems"
+                                class="pagination-sm" boundary-links="true"
+                                previous-text="<" next-text=">" first-text="First" last-text="Last">
+                    </pagination>
+                    
+                </div>
+            </div>
+
+        </div>
+    </body>
+</html>
