@@ -1,6 +1,10 @@
-# SimpleAngularJSBootstrapUIPagination
+# SimpleAngularJSBootstrapUIServersidePagination
 Simplest case example of an AngularJS app using Bootstrap UI Pagination directive, with a 
-fixed set of local data in the page.
+paged set of local data retrieved from a REST resource.
 
-Created as a learning exercise before adapting to use $http to retrieve data
+Created as a learning exercise to combine Bootstrap UI Pagination with $http to retrieve data
 from the server.
+
+See also: https://github.com/kevinhooke/SimpleAngularJSBootstrapUIPagination
+
+
