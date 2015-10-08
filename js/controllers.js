@@ -4,6 +4,7 @@ simpleApp.controller('paginationCtrl', function($scope, $http) {
 
     $scope.numPerPage = 10;
     $scope.currentPage = 1;
+    $scope.previousPage = -1;
     $scope.currentPageItems = {};
     $scope.currentPageItems.lastItem = new Date('1970-01-01');
     
@@ -14,9 +15,10 @@ simpleApp.controller('paginationCtrl', function($scope, $http) {
         return formattedDate + "T" + timeOnly + "Z";
     }
 
-    function retrievePage(fromDate){
+    function retrievePage(fromDate, direction){
         var formattedDate = formatDate(fromDate);
         var nextPageRequest = 'http://localhost:8080/spotviz/spotdata/pagedspots/kk6dct?fromdate=' + formattedDate;
+        nextPageRequest += "&direction=" + direction;
         $http.get(nextPageRequest)
             .then(function(response){
                 $scope.currentPageItems.data = response.data;
@@ -30,8 +32,17 @@ simpleApp.controller('paginationCtrl', function($scope, $http) {
 
     //move to selected page of items when currentPage value changes
     $scope.$watch("currentPage" , function(){
-
-        retrievePage($scope.currentPageItems.lastItem);
+        var direction;
+        
+        //check if we're paging forwards or backwards        
+        if($scope.currentPage > $scope.previousPage){
+            direction = "next";
+        }
+        else{
+            direction = "previous";
+        }
+        $scope.previousPage = $scope.currentPage;
+        retrievePage($scope.currentPageItems.lastItem, direction);
     
     });
 	
